@@ -15,23 +15,18 @@ const Login = () => {
             ...login,
             [e.target.name]: e.target.value
         })
-        console.log(login)
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(login.username)
-        console.log(login.password)
         axios.post('http://localhost:5000/api/login', {
             username: login.username,
             password: login.password
         })
             .then(res=>{
-                console.log(res)
                 localStorage.setItem('token', res.data.token)
                 history.push('/view')
             })
             .catch(err=>{
-                console.log(err.response)
                 setLogin({
                     ...login,
                     error: 'Error: ' + err.response.status + ' ' + err.response.statusText
