@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Login = () => {
-    
+    const [login, setLogin] = useState({
+        username: '',
+        password: ''
+    })
+    const handleChange = (e) => {
+        setLogin({
+            [e.target.name]: e.target.value
+        })
+        console.log(login)
+    }
     return(<ComponentContainer>
         <ModalContainer>
             <h1>Welcome to Blogger Pro</h1>
@@ -10,11 +19,23 @@ const Login = () => {
             <Label>
                 Username
             </Label>
-            <Input></Input>
+            <Input
+            id='username'
+            type='text'
+            name='username'
+            onChange={handleChange}
+            value={login.username}
+            ></Input>
             <Label>
                 Password
             </Label>
-            <Input></Input>
+            <Input 
+            id='password'
+            type='password'
+            name='password'
+            onChange={handleChange}
+            value={login.password}
+            ></Input>
             <Button>Login</Button>
         </ModalContainer>
     </ComponentContainer>);
