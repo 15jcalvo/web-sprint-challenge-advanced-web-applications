@@ -15,6 +15,14 @@ const dummyArticle = {
     summary: "summary", //short summary statement of article
     body: ""  //paragraph of article text
 }
+const dummyArticle1 = {
+    id: 'aMqwd', //unique article id,
+    author: "",
+    headline: "headlineproxy", //title of article
+    createdOn: '2021-08-09T18:02:38-04:00',
+    summary: "summary", //short summary statement of article
+    body: ""  //paragraph of article text
+}
 
 test('renders component without errors', ()=> {
     render(<Article article={dummyArticle}/>)
@@ -29,6 +37,9 @@ test('renders headline, author from the article when passed in through props', (
 });
 
 test('renders "Associated Press" when no author is given', ()=> {
+    render(<Article article={dummyArticle1}/>)
+    const author = screen.queryByText(/Associated Press/i)
+    expect(author).toBeInTheDocument()
 });
 
 test('executes handleDelete when the delete button is pressed', ()=> {
