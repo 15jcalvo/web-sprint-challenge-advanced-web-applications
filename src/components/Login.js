@@ -9,15 +9,19 @@ const Login = () => {
     })
     const handleChange = (e) => {
         setLogin({
+            ...login,
             [e.target.name]: e.target.value
         })
         console.log(login)
     }
+    
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(login.username)
+        console.log(login.password)
         axios.post('http://localhost:5000/api/login', {
-            username: 'Lambda',
-            password: 'School'
+            username: login.username,
+            password: login.password
         })
             .then(res=>{
                 console.log(res)
