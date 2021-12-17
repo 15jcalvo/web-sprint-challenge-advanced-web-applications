@@ -31,10 +31,10 @@ const Login = () => {
                 history.push('/view')
             })
             .catch(err=>{
-                console.log(err)
+                console.log(err.response)
                 setLogin({
                     ...login,
-                    error: 'LOGIN ERROR'
+                    error: 'Error: ' + err.response.status + ' ' + err.response.statusText
                 })
             })
     }
