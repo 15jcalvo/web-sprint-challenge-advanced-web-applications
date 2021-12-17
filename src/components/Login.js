@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios'
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
+    const history = useHistory()
     const [login, setLogin] = useState({
         username: '',
         password: '',
@@ -15,7 +17,6 @@ const Login = () => {
         })
         console.log(login)
     }
-    
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(login.username)
@@ -27,6 +28,7 @@ const Login = () => {
             .then(res=>{
                 console.log(res)
                 localStorage.setItem('token', res.data.token)
+                history.push('/view')
             })
             .catch(err=>{
                 console.log(err)
