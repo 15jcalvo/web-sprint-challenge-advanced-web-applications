@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-
+import axiosWithAuth from '../utils/axiosWithAuth'
 import userEvent from '@testing-library/user-event';
 import MutationObserver from 'mutationobserver-shim';
 import { render, screen } from '@testing-library/react';
@@ -23,6 +23,15 @@ const dummyArticle1 = {
     summary: "summary", //short summary statement of article
     body: ""  //paragraph of article text
 }
+const handleDelete = (id) => {
+    axiosWithAuth().delete(`/articles/${id}`, {})
+        .then(res=> {
+            console.log(res)
+        })
+        .catch(err=> {
+            console.log(err)
+        })
+}
 
 test('renders component without errors', ()=> {
     render(<Article article={dummyArticle}/>)
@@ -43,6 +52,10 @@ test('renders "Associated Press" when no author is given', ()=> {
 });
 
 test('executes handleDelete when the delete button is pressed', ()=> {
+    render(<Article article={dummyArticle1} handleDelete={handleDelete}/>)
+    userEvent.click(screen.getByTestId('deleteButton'))
+    const author = screen.queryByText(/authorproxy/i)
+    expect(author).not.toBeInTheDocument()
 });
 
 //Task List: 
