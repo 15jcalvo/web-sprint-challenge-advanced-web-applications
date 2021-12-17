@@ -16,7 +16,7 @@ const EditForm = (props)=> {
     const {handleEdit, handleEditCancel, editId} = props;
 
     useEffect(()=> {
-        axiosWithAuth().get(`http://localhost:5000/api/articles/${props.editId}`)
+        axiosWithAuth().get(`http://localhost:5000/api/articles/${editId}`)
             .then(res=> {
                 console.log(res)
                 setArticle(res.data)
