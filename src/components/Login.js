@@ -5,7 +5,8 @@ import axios from 'axios'
 const Login = () => {
     const [login, setLogin] = useState({
         username: '',
-        password: ''
+        password: '',
+        error: '',
     })
     const handleChange = (e) => {
         setLogin({
@@ -25,9 +26,14 @@ const Login = () => {
         })
             .then(res=>{
                 console.log(res)
+                localStorage.setItem('token', res.data.token)
             })
             .catch(err=>{
                 console.log(err)
+                setLogin({
+                    ...login,
+                    error: 'LOGIN ERROR'
+                })
             })
     }
     return(<ComponentContainer>
@@ -54,6 +60,7 @@ const Login = () => {
             onChange={handleChange}
             value={login.password}
             ></Input>
+            <p id='error'>{login.error}</p>
             <Button onClick={handleSubmit}>Login</Button>
         </ModalContainer>
     </ComponentContainer>);
