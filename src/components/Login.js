@@ -58,7 +58,7 @@ const Login = () => {
             value={login.password}
             ></Input>
             <p id='error'>{login.error}</p>
-            <Button onClick={handleSubmit}>Login</Button>
+            <Button onClick={handleSubmit} id="submit">Login</Button>
         </ModalContainer>
     </ComponentContainer>);
 }
