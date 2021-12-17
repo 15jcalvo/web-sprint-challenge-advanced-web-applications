@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios'
 
 const Login = () => {
     const [login, setLogin] = useState({
@@ -11,6 +12,19 @@ const Login = () => {
             [e.target.name]: e.target.value
         })
         console.log(login)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.post('http://localhost:5000/api/login', {
+            username: 'Lambda',
+            password: 'School'
+        })
+            .then(res=>{
+                console.log(res)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
     }
     return(<ComponentContainer>
         <ModalContainer>
@@ -36,7 +50,7 @@ const Login = () => {
             onChange={handleChange}
             value={login.password}
             ></Input>
-            <Button>Login</Button>
+            <Button onClick={handleSubmit}>Login</Button>
         </ModalContainer>
     </ComponentContainer>);
 }
